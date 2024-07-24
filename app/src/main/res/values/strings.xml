@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Construction Site</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="draft_image_description">draft</string>
+    <string name="construction_site">Construction Site</string>
+</resources>

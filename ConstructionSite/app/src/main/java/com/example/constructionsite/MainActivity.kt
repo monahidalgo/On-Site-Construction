@@ -18,8 +18,7 @@ class MainActivity : AppCompatActivity() {
         val usernameEditText = findViewById<EditText>(R.id.username_edit_text)
         val passwordEditText = findViewById<EditText>(R.id.password_edit_text)
         val loginButton = findViewById<Button>(R.id.login_button)
-        val createAccountTextView =
-            findViewById<TextView>(R.id.create_account_text_view) // Assuming you have this in your layout
+        val createAccountTextView = findViewById<TextView>(R.id.create_account_text_view) // Assuming you have this in your layout
         val forgotPasswordTextView = findViewById<TextView>(R.id.forgot_password_text_view)
 
 

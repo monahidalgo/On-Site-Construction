@@ -14,8 +14,7 @@ class DashboardScreen : AppCompatActivity() {
         val projectsButton = findViewById<Button>(R.id.projects_button)
         val equipmentButton = findViewById<Button>(R.id.equipment_button)
         val orderItemsButton = findViewById<Button>(R.id.order_items_button)
-        val scheduleButton = findViewById<Button>(R.id.schedule_button)
-        val photosAndNotesButton = findViewById<Button>(R.id.photos_and_notes_button)
+
 
         teamsButton.setOnClickListener {
             // Handle teams button click

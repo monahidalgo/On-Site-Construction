@@ -1,5 +1,10 @@
 # On-Site Construction
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/99169330-500b-4df6-8f8b-53558da20bca" alt="redlogo" width="300" />
+</div>
+
+
 **On-Site Construction** is a Construction Site Management App currently in development. 
 This app aims to serve contractors and crews across various fields, including construction , plumbing companies and other contracting services. It provides a platform for documenting projects and images, enhancing communication and efficiency on the job site with Project Tools and dashboard.
 

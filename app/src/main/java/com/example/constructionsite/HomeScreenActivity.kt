@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -20,11 +19,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
+
 class HomeScreenActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var projectRecyclerView: RecyclerView
-    private val projects = mutableListOf<Project>() // List of Project objects
+    private val projects = mutableListOf<String>()
     private lateinit var projectAdapter: ProjectAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,7 @@ class HomeScreenActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         setContentView(R.layout.home_screen)
 
         drawerLayout = findViewById(R.id.drawer_layout)
-        projectRecyclerView = findViewById(R.id.projectRecyclerView)
+        projectRecyclerView = findViewById(R.id.projectRecyclerView) // Make sure you have this in your layout
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -47,32 +47,30 @@ class HomeScreenActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        // Set profile information in the header (fetch from user data)
+        val headerView = navigationView.getHeaderView(0)
+        val profileNameTextView = headerView.findViewById<TextView>(R.id.profileNameTextView)
+        val profilePhoneTextView = headerView.findViewById<TextView>(R.id.profilePhoneTextView)
+        val profileEmailTextView = headerView.findViewById<TextView>(R.id.profileEmailTextView)
+
+        profileNameTextView.text = "Mona Hidalgo " // Replace with actual user name
+        profilePhoneTextView.text = "Phone: 323-400-0421" // Replace with actual phone
+        profileEmailTextView.text = "Email: mona@bittleco.com" // Replace with actual email
+
         // Set up RecyclerView
-        initializeMockProjects()
-        projectAdapter = ProjectAdapter(projects) { project ->
-            // Navigate to the Dashboard screen with project name
-            val intent = Intent(this, DashboardScreen::class.java).apply {
-                putExtra("PROJECT_NAME", project.name)
-            }
-            startActivity(intent)
+        projectAdapter = ProjectAdapter(projects) { projectName ->
+            // Handle project click (you can open a new activity with project details here)
+            // For now, just a Toast message
+            Toast.makeText(this, "Clicked on project: $projectName", Toast.LENGTH_SHORT).show()
         }
         projectRecyclerView.adapter = projectAdapter
         projectRecyclerView.layoutManager = LinearLayoutManager(this)
 
         // Floating Action Button for adding new projects
-        val fab: FloatingActionButton = findViewById(R.id.floatingActionButton)
+        val fab: FloatingActionButton = findViewById(R.id.floatingActionButton) // Make sure you have this in your layout
         fab.setOnClickListener {
             showCreateProjectDialog()
         }
-    }
-
-    private fun initializeMockProjects() {
-        // Adding mock projects with icons
-        projects.add(Project("High Rise Building", R.drawable.conicon))
-        projects.add(Project("Shopping Mall", R.drawable.iconsite))
-        projects.add(Project("Office Complex", R.drawable.conicon))
-        projects.add(Project("Residential Area", R.drawable.conicon))
-        // Add more mock projects as needed
     }
 
     private fun showCreateProjectDialog() {
@@ -84,12 +82,8 @@ class HomeScreenActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             .setPositiveButton("Create") { dialog, _ ->
                 val projectName = projectNameEditText.text.toString()
                 if (projectName.isNotEmpty()) {
-                    // For simplicity, using a default icon for new projects
-                    projects.add(Project(projectName, R.drawable.conicon))
-                    projectAdapter.notifyItemInserted(projects.size - 1) // Notify adapter of new item
-                    projectRecyclerView.scrollToPosition(projects.size - 1) // Scroll to new item
-                } else {
-                    Toast.makeText(this, "Project name cannot be empty", Toast.LENGTH_SHORT).show()
+                    projects.add(projectName)
+                    projectAdapter.notifyItemInserted(projects.size - 1)
                 }
             }
             .setNegativeButton("Cancel", null)
@@ -100,19 +94,26 @@ class HomeScreenActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         when (item.itemId) {
             R.id.nav_project_name -> {
                 // Navigate to Project Name screen
+                // Start your ProjectNameActivity here (create a new activity for it)
             }
             R.id.nav_change_password -> {
                 // Navigate to Change Password screen
+                // Start your ChangePasswordActivity here
             }
             R.id.nav_support -> {
                 // Navigate to Support screen
+                // Start your SupportActivity here
             }
             R.id.nav_logout -> {
+                // Handle logout (e.g., add clearUserSession() function to clear user session,
+                // navigate to MainActivity, and finish HomeScreenActivity)
+                // in onResume() to check if user is still logged in)
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish()
+                finish() // Finish HomeScreenActivity
             }
         }
+
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
@@ -124,38 +125,9 @@ class HomeScreenActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             super.onBackPressed()
         }
     }
-
-    // Project Adapter class to display the project list
-    inner class ProjectAdapter(
-        private val projectList: MutableList<Project>,
-        private val onProjectClick: (Project) -> Unit
-    ) : RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder>() {
-
-        inner class ProjectViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val projectIcon: ImageView = view.findViewById(R.id.projectIcon)
-            val projectName: TextView = view.findViewById(R.id.projectName)
-
-            init {
-                view.setOnClickListener {
-                    onProjectClick(projectList[adapterPosition])
-                }
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.project_item, parent, false)
-            return ProjectViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
-            val project = projectList[position]
-            holder.projectIcon.setImageResource(project.iconResId)
-            holder.projectName.text = project.name
-        }
-
-        override fun getItemCount() = projectList.size
-    }
-
-    // Data class for Project
-    data class Project(val name: String, val iconResId: Int)
 }
+
+
+
+
+// ProjectAdapter class (inside HomeScreenActivity.kt for simplicity)

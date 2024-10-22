@@ -2,4 +2,5 @@
 <resources>
     <item name="avatarImageView" type="id" />
     <item name="createAccountTextView" type="id" />
+    <item name="projectName" type="id">projectName</item>
 </resources>

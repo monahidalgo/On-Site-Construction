@@ -31,4 +31,8 @@
     <string name="navigation_drawer_open">navigation_drawer_open</string>
     <string name="navigation_drawer_close">navigation_drawer_close</string>
     <string name="add_new_project">Add new Project</string>
+    <string name="project_icon_desc">project_icon_desc</string>
+    <string name="project_address_hint">project_icon_desc</string>
+    <string name="project_client_hint">project-client_hint\n</string>
+    <string name="project_name_hint">project_name_hint</string>
 </resources>

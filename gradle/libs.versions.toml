@@ -26,6 +26,11 @@ roomCommonVersion = "2.4.2"
 roomKtx = "2.6.1"
 firebaseAuthKtx = "23.0.0"
 roomKtxVersion = "2.4.2"
+googleGmsGoogleServices = "4.4.2"
+firebaseAnalytics = "22.1.2"
+firebaseVertexai = "16.0.0-beta06"
+firebaseCrashlytics = "19.2.0"
+googleFirebaseCrashlytics = "3.0.2"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
@@ -56,8 +61,13 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 material-v150 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 material-v1xx = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
+firebase-vertexai = { group = "com.google.firebase", name = "firebase-vertexai", version.ref = "firebaseVertexai" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
 

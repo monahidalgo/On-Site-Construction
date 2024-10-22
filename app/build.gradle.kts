@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.9.0"
 
     id("kotlin-parcelize")
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.firebase.crashlytics)
 
 }
 
@@ -68,6 +70,9 @@ dependencies {
     implementation(libs.androidx.room.common.v242)
     implementation(libs.androidx.room.ktx.v242)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.vertexai)
+    implementation(libs.firebase.crashlytics)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit.v113)
     androidTestImplementation(libs.androidx.espresso.core.v340)

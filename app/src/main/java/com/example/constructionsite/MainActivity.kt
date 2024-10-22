@@ -2,6 +2,7 @@ package com.example.constructionsite
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -28,8 +29,7 @@ class MainActivity : AppCompatActivity() {
 
             // Validate user input
             if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please enter a Username and Password", Toast.LENGTH_LONG)
-                    .show()
+                Toast.makeText(this, "Please enter a Username and Password", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, HomeScreenActivity::class.java)
                 startActivity(intent) // Start HomeScreenActivity on successful login
             } else {
-                Toast.makeText(this, "Invalid Username or Password",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Invalid Username or Password", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -54,5 +54,17 @@ class MainActivity : AppCompatActivity() {
             // TODO: Implement Forgot Password functionality (e.g., navigate to a ForgotPasswordActivity)
             Toast.makeText(this, "Forgot Password Emailed!", Toast.LENGTH_SHORT).show()
         }
+
+        // Creates a button that mimics a crash when pressed
+        val crashButton = Button(this)
+        crashButton.text = "Test Crash"
+        crashButton.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
+
+        // Add the crash button to the activity layout
+        addContentView(crashButton, ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT))
     }
 }
